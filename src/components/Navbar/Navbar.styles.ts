@@ -33,7 +33,7 @@ export const UserIconWrap = styled.div`
 	height: 80%;
 	display: flex;
 	align-items: center;
-	background-color: #7000df;
+	background-color: #0a5c4a;
 	border-radius: 50%;
 	margin-right: 1rem;
 	padding: 2px;
