@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { OPEN__MODAL } from "../../constants";
 import { useQuizData } from "../../context/quizContext";
-import { Card, CardTitle, CardWrap, Heading, StartButton } from "./styles";
+import { Card, CardTitle, CardWrap, Heading, Main, StartButton } from "./styles";
 
 const categories = [
 	{
@@ -18,19 +18,22 @@ const categories = [
 
 function CategoryCard() {
 	const [chosen, setChosen] = useState("");
-	const { state, dispatch } = useQuizData();
-	console.log("state in category", state);
+	const { dispatch } = useQuizData();
+	const [message, setMessage] = useState("");
 
 	const onClickHandler = (e: React.MouseEvent<HTMLDivElement>, item: string) => {
 		return setChosen(item);
 	};
 
 	const openModalHandler = () => {
-		return dispatch({ type: OPEN__MODAL, payload: { modalType: "addName", data: chosen } });
+		if (chosen.length > 0) {
+			return dispatch({ type: OPEN__MODAL, payload: { modalType: "addName", data: chosen } });
+		}
+		return setMessage("Please click on a Category");
 	};
 
 	return (
-		<>
+		<Main>
 			<Heading>Choose a Category</Heading>
 			<CardWrap>
 				{categories.map((el) => (
@@ -44,8 +47,9 @@ function CategoryCard() {
 					</Card>
 				))}
 			</CardWrap>
+			{message.length > 0 && <p className="error-message">{message}</p>}
 			<StartButton onClick={openModalHandler}>Start</StartButton>
-		</>
+		</Main>
 	);
 }
 

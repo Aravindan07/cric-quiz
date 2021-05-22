@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Modal from "react-modal";
 import { CLOSE__MODAL } from "../../constants";
 import { useQuizData } from "../../context/quizContext";

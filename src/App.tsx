@@ -1,15 +1,8 @@
 import { GlobalStyle } from "./GlobalStyles";
 import { Modal, Navbar } from "./components/index";
 import CategoryCard from "./components/CategoryCard";
-import styled from "styled-components";
-
-export const Main = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-`;
+import { Route, Switch } from "react-router-dom";
+import { QuizPage, ResultPage } from "./pages";
 
 function App() {
 	return (
@@ -17,9 +10,11 @@ function App() {
 			<GlobalStyle />
 			<Navbar />
 			<Modal />
-			<Main>
-				<CategoryCard />
-			</Main>
+			<Switch>
+				<Route path="/quiz/result" exact component={ResultPage} />
+				<Route path="/quiz" exact component={QuizPage} />
+				<Route path="/" component={CategoryCard} />
+			</Switch>
 		</>
 	);
 }

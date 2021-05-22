@@ -5,18 +5,20 @@ export const initialState: any = {
 	questions: [],
 	currentQuestion: 1,
 	score: 0,
+	name: "",
 	modal: {
 		isModalOpen: false,
 		modalType: "",
 		data: "",
 	},
+	userAnswers: [],
 };
 
 export const QuizContext = createContext(initialState);
 
 export const QuizDataProvider: React.FC = ({ children }) => {
 	const [state, dispatch] = useReducer(quizReducer, initialState);
-	console.log(state);
+
 	return <QuizContext.Provider value={{ state, dispatch }}>{children}</QuizContext.Provider>;
 };
 

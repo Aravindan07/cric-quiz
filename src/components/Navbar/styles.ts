@@ -27,6 +27,10 @@ export const TitleContainer = styled.div`
 export const NavTitle = styled.h2`
 	margin-left: 5px;
 	letter-spacing: 0.8px;
+	a {
+		text-decoration: none;
+		color: #fff;
+	}
 `;
 
 export const UserIconWrap = styled.div`
