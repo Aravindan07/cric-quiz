@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { OPEN__MODAL } from "../../constants";
 import { useQuizData } from "../../context/quizContext";
-import { Card, CardTitle, CardWrap, Heading, Main, StartButton } from "./styles";
+import { Card, CardTitle, CardWrap, ErrorMessage, Heading, Main, StartButton } from "./styles";
 
 const categories = [
 	{
@@ -47,7 +47,7 @@ function CategoryCard() {
 					</Card>
 				))}
 			</CardWrap>
-			{message.length > 0 && <p className="error-message">{message}</p>}
+			{message.length > 0 && <ErrorMessage>{message}</ErrorMessage>}
 			<StartButton onClick={openModalHandler}>Start</StartButton>
 		</Main>
 	);

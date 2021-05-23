@@ -7,13 +7,6 @@ export const Main = styled.div`
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
-	.error-message {
-		margin: 1rem 0 1rem 0;
-		color: #b91538;
-		font-weight: 600;
-		font-size: 18px;
-		letter-spacing: 0.8px;
-	}
 	@media ${devices.mobileL} {
 		min-height: 100%;
 	}
@@ -90,4 +83,12 @@ export const StartButton = styled.button`
 	@media ${devices.mobileL} {
 		margin: 1rem 0;
 	}
+`;
+
+export const ErrorMessage = styled.p`
+	margin: 1rem 0 1rem 0;
+	color: #b91538;
+	font-weight: 600;
+	font-size: 18px;
+	letter-spacing: 0.8px;
 `;

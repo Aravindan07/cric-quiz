@@ -1,20 +1,20 @@
-import { NavbarWrapper, NavTitle, TitleContainer, UserIconWrap } from "./styles";
-import { ReactComponent as Logo } from "../../icons/title-logo.svg";
-import { ReactComponent as UserIcon } from "../../icons/user-icon.svg";
+import { NavbarWrapper, NavTitle, TitleContainer } from "./styles";
+import { ReactComponent as Logo } from "../../icons/multiple-choice-quiz.svg";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
 	return (
 		<NavbarWrapper>
 			<TitleContainer>
-				<Logo className="logo" />
+				<Logo fill="#0a5c4a" className="logo" />
 				<NavTitle>
 					<Link to="/">CricQuiz</Link>
 				</NavTitle>
 			</TitleContainer>
-			<UserIconWrap>
+			{/* Needed in future that's why commenting the below lines */}
+			{/* <UserIconWrap>
 				<UserIcon />
-			</UserIconWrap>
+			</UserIconWrap> */}
 		</NavbarWrapper>
 	);
 }

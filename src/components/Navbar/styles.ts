@@ -14,7 +14,7 @@ export const NavbarWrapper = styled.div`
 	.logo {
 		width: 25px;
 		height: 25px;
-		margin-top: 2px;
+		margin-top: 5px;
 	}
 `;
 
