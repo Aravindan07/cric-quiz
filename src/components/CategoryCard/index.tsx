@@ -12,7 +12,7 @@ const categories = [
 	{
 		id: "2",
 		name: "IPL",
-		type: "",
+		type: "ipl",
 	},
 ];
 
@@ -26,24 +26,23 @@ function CategoryCard() {
 	};
 
 	const openModalHandler = () => {
-		if (chosen.length > 0) {
-			return dispatch({ type: OPEN__MODAL, payload: { modalType: "addName", data: chosen } });
-		}
-		return setMessage("Please click on a Category");
+		return chosen.length > 0
+			? dispatch({ type: OPEN__MODAL, payload: { modalType: "addName", data: chosen } })
+			: setMessage("Please click on a Category");
 	};
 
 	return (
 		<Main>
 			<Heading>Choose a Category</Heading>
 			<CardWrap>
-				{categories.map((el) => (
+				{categories.map(({ id, type, name }) => (
 					<Card
-						key={el.id}
-						type={el.type}
-						onClick={(e) => onClickHandler(e, el.name)}
-						active={el.name === chosen}
+						key={id}
+						type={type}
+						onClick={(e) => onClickHandler(e, type)}
+						active={type === chosen}
 					>
-						<CardTitle>{el.name}</CardTitle>
+						<CardTitle>{name}</CardTitle>
 					</Card>
 				))}
 			</CardWrap>

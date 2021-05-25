@@ -22,11 +22,9 @@ function AddName() {
 	const [message, setMessage] = useState("");
 	const history = useHistory();
 	const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setName(e.target.value);
-		if (e.target.value.length > 0) {
-			return setIsNameActive(true);
-		}
-		return setIsNameActive(false);
+		let value = e.target.value;
+		setName(value);
+		return value.length > 0 ? setIsNameActive(true) : setIsNameActive(false);
 	};
 
 	const modalCloseHandler = () => {

@@ -6,17 +6,19 @@ import {
 	SET__QUESTIONS,
 } from "../constants";
 
+export type OptionType = {
+	_id: string;
+	name: string;
+	correct: boolean;
+};
+
 export type Question = {
 	_id: string;
 	category: string;
 	correctAnswer: string;
-	options: string[];
+	options: OptionType[];
 	question: string;
 	imageUrl?: string;
-};
-
-export type LoadedQuestions = {
-	questions: Question[];
 };
 
 export type ModalState = {
@@ -26,13 +28,12 @@ export type ModalState = {
 };
 
 export type AnswerObject = {
+	_id: string;
 	question: string;
 	answer: string;
 	correct: boolean;
-	correctAnswer: string;
+	correctAnswer: OptionType;
 };
-
-export type QuestionState = Question & { answers: string[] };
 
 export type QuizState = {
 	questions: Question[];
@@ -40,7 +41,7 @@ export type QuizState = {
 	score: number;
 	modal: ModalState;
 	name: string;
-	userAnswers: AnswerObject[];
+	userAnswers: Array<AnswerObject>;
 };
 
 export type Actions =

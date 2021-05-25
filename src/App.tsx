@@ -1,8 +1,7 @@
-import { GlobalStyle } from "./GlobalStyles";
-import { Modal, Navbar } from "./components/index";
-import CategoryCard from "./components/CategoryCard";
 import { Route, Switch } from "react-router-dom";
-import { QuizPage, ResultPage } from "./pages";
+import { Modal, Navbar, CategoryCard } from "./components";
+import { NotFoundPage, QuizPage, ResultPage } from "./pages";
+import { GlobalStyle } from "./GlobalStyles";
 
 function App() {
 	return (
@@ -11,9 +10,10 @@ function App() {
 			<Navbar />
 			<Modal />
 			<Switch>
-				<Route path="/quiz/result" exact component={ResultPage} />
+				<Route path="/" exact component={CategoryCard} />
 				<Route path="/quiz" exact component={QuizPage} />
-				<Route path="/" component={CategoryCard} />
+				<Route path="/quiz/result" exact component={ResultPage} />
+				<Route path="*" component={NotFoundPage} />
 			</Switch>
 		</>
 	);

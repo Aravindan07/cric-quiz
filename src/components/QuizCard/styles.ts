@@ -38,10 +38,8 @@ export const AnswerButton = styled.button<ButtonProps>`
 	letter-spacing: 0.8px;
 	text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
 	transition: all 0.3s ease;
-	opacity: ${(props) => (props.disabled ? "0.5" : 1)};
-	cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+	cursor: pointer;
 	:hover {
-		background-color: ${(props) => (props.disabled ? "none" : "#d1fae5")};
-		opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
 	}
 `;

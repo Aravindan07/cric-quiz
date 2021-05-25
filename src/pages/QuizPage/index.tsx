@@ -5,7 +5,6 @@ import { useQuizData } from "../../context/quizContext";
 import { PageWrapper } from "./styles";
 import axios from "axios";
 import { SET__QUESTIONS } from "../../constants";
-import { CancelButton } from "../../components/Modal/AddName/styles";
 import { useHistory } from "react-router";
 
 const { REACT_APP_BACKEND_URL } = process.env;
@@ -18,16 +17,17 @@ function QuizPage() {
 
 	useEffect(() => {
 		(async () => {
-			const response = await axios.get(
+			const { data } = await axios.get(
 				`${REACT_APP_BACKEND_URL}/quiz?category=${state.modal.data}`
 			);
-			setQuizQuestions(response.data.questions);
-			return dispatch({ type: SET__QUESTIONS, payload: response.data });
+
+			setQuizQuestions(data.questions);
+			return dispatch({ type: SET__QUESTIONS, payload: data });
 		})();
-	}, []);
+	}, [dispatch, state.modal.data]);
 
 	const incrementQuestionNumber = () => {
-		return setQuestionNumber((prev) => prev + 1);
+		setQuestionNumber((prev) => prev + 1);
 	};
 
 	const seeScoreHandler = () => {
@@ -42,12 +42,12 @@ function QuizPage() {
 				Question {questionNumber + 1} of {quizQuestion.length}
 			</p>
 
-			<QuizCard data={quizQuestion[questionNumber] && quizQuestion[questionNumber]} />
-			{quizQuestion[questionNumber + 1] === undefined ? (
-				<CancelButton onClick={seeScoreHandler}>See Score</CancelButton>
-			) : (
-				<CancelButton onClick={incrementQuestionNumber}>Next</CancelButton>
-			)}
+			<QuizCard
+				data={quizQuestion[questionNumber] && quizQuestion[questionNumber]}
+				nextQuestion={incrementQuestionNumber}
+				scoreGetter={seeScoreHandler}
+				isLast={quizQuestion[questionNumber + 1]}
+			/>
 		</PageWrapper>
 	);
 }

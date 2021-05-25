@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Modal from "react-modal";
 import { CLOSE__MODAL } from "../../constants";
 import { useQuizData } from "../../context/quizContext";
-import { useMediaQuery } from "../../utils/useMediaQueries";
+import { useModalStyles } from "./styles";
 import AddName from "./AddName";
 
 const modalList: any = {
@@ -15,7 +15,7 @@ function ModalComponent() {
 		state: { modal },
 	} = useQuizData();
 
-	const [width] = useMediaQuery();
+	const { overlay, content } = useModalStyles();
 
 	useEffect(() => {
 		Modal.setAppElement("#root");
@@ -23,19 +23,6 @@ function ModalComponent() {
 
 	const closeModal = () => {
 		return dispatch({ type: CLOSE__MODAL });
-	};
-
-	const overlay = {
-		backgroundColor: "rgba(0,0,0,0.8)",
-	};
-
-	const content = {
-		width: width <= 500 ? "80%" : "50%",
-		height: "50%",
-		margin: "auto",
-		borderRadius: "5px",
-		padding: width <= 500 ? "30px 10px" : "30px 20px 20px 20px",
-		ZIndex: "10",
 	};
 
 	const ModalToShow = modalList[modal.modalType];

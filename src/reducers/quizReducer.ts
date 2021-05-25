@@ -41,22 +41,9 @@ export const quizReducer = (state: QuizState, action: Actions): QuizState => {
 			};
 
 		case ADD__ANSWER:
-			const foundAnswer = state.userAnswers.find(
-				(el) => el.question === action.payload.question
-			);
 			return {
 				...state,
-				userAnswers: foundAnswer
-					? state.userAnswers.map((el) =>
-							el.answer === action.payload.answer
-								? el
-								: {
-										...el,
-										answer: action.payload.answer,
-										correct: action.payload.correct,
-								  }
-					  )
-					: [...state.userAnswers, action.payload],
+				userAnswers: state.userAnswers.concat(action.payload),
 			};
 
 		default:
