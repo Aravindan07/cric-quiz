@@ -1,15 +1,9 @@
-import {
-	ADD__ANSWER,
-	CLOSE__MODAL,
-	OPEN__MODAL,
-	SET__PLAYER__NAME,
-	SET__QUESTIONS,
-} from "../constants";
-import { Actions, QuizState } from "../types/quiz.types";
+import * as Actions from "../constants";
+import { ActionsType, AppState } from "../types/quiz.types";
 
-export const quizReducer = (state: QuizState, action: Actions): QuizState => {
+export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 	switch (action.type) {
-		case OPEN__MODAL:
+		case Actions.OPEN__MODAL:
 			return {
 				...state,
 				modal: {
@@ -19,7 +13,7 @@ export const quizReducer = (state: QuizState, action: Actions): QuizState => {
 					data: action.payload.data,
 				},
 			};
-		case CLOSE__MODAL:
+		case Actions.CLOSE__MODAL:
 			return {
 				...state,
 				modal: {
@@ -28,22 +22,80 @@ export const quizReducer = (state: QuizState, action: Actions): QuizState => {
 				},
 			};
 
-		case SET__PLAYER__NAME:
+		case Actions.SET__QUIZ__CATEGORY: {
+			return {
+				...state,
+				category: action.payload,
+			};
+		}
+
+		case Actions.SET__PLAYER__NAME:
 			return {
 				...state,
 				name: action.payload,
 			};
 
-		case SET__QUESTIONS:
+		case Actions.SET__QUESTIONS:
+			console.log("action.payload", action.payload);
+
 			return {
 				...state,
-				questions: [action.payload],
+				questions: [...action.payload.questions],
 			};
 
-		case ADD__ANSWER:
+		case Actions.ADD__ANSWER:
 			return {
 				...state,
 				userAnswers: state.userAnswers.concat(action.payload),
+			};
+
+		case Actions.CALCULATE__SCORE:
+			return {
+				...state,
+				score: state.score + 10,
+			};
+
+		case Actions.UPDATE__USER__DASHBOARD:
+			return {
+				...state,
+				dashboard: action.payload.item.quiz,
+			};
+
+		case Actions.SET__LOGIN:
+			localStorage.setItem("token", action.payload.token);
+			localStorage.setItem("userAuthenticated", "true");
+			return {
+				...state,
+				isAuthenticated: true,
+				user: action.payload.user,
+				dashboard: action.payload.user.userScores!.quiz,
+			};
+
+		case Actions.SET__SIGNUP:
+			localStorage.setItem("token", action.payload.token);
+			localStorage.setItem("userAuthenticated", "true");
+			return {
+				...state,
+				user: action.payload.user,
+				isAuthenticated: true,
+			};
+
+		case Actions.LOAD__USER:
+			localStorage.setItem("userAuthenticated", "true");
+			return {
+				...state,
+				user: action.payload.user,
+				isAuthenticated: true,
+				dashboard: action.payload.user.userScores!.quiz,
+			};
+
+		case Actions.SET__LOGOUT:
+			localStorage.removeItem("token");
+			localStorage.removeItem("userAuthenticated");
+			return {
+				...state,
+				user: null,
+				isAuthenticated: false,
 			};
 
 		default:

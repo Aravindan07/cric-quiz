@@ -4,9 +4,12 @@ import { CLOSE__MODAL } from "../../constants";
 import { useQuizData } from "../../context/quizContext";
 import { useModalStyles } from "./styles";
 import AddName from "./AddName";
+import Login from "./Login";
 
 const modalList: any = {
 	addName: AddName,
+	login: Login,
+	register: Login,
 };
 
 function ModalComponent() {
@@ -25,7 +28,9 @@ function ModalComponent() {
 		return dispatch({ type: CLOSE__MODAL });
 	};
 
-	const ModalToShow = modalList[modal.modalType];
+	const type = modal.modalType;
+
+	const ModalToShow = modalList[type!];
 
 	return (
 		<Modal

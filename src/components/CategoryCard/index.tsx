@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { OPEN__MODAL } from "../../constants";
+import { useHistory } from "react-router";
+import { OPEN__MODAL, SET__QUIZ__CATEGORY } from "../../constants";
 import { useQuizData } from "../../context/quizContext";
 import { Card, CardTitle, CardWrap, ErrorMessage, Heading, Main, StartButton } from "./styles";
 
@@ -18,17 +19,29 @@ const categories = [
 
 function CategoryCard() {
 	const [chosen, setChosen] = useState("");
-	const { dispatch } = useQuizData();
+	const { dispatch, state } = useQuizData();
 	const [message, setMessage] = useState("");
+	const history = useHistory();
 
 	const onClickHandler = (e: React.MouseEvent<HTMLDivElement>, item: string) => {
 		return setChosen(item);
 	};
 
 	const openModalHandler = () => {
-		return chosen.length > 0
-			? dispatch({ type: OPEN__MODAL, payload: { modalType: "addName", data: chosen } })
-			: setMessage("Please click on a Category");
+		if (chosen === "") {
+			return setMessage("Please click on a Category");
+		}
+
+		dispatch({ type: SET__QUIZ__CATEGORY, payload: chosen });
+
+		if (state.isAuthenticated) {
+			return history.push("/quiz");
+		}
+
+		return dispatch({
+			type: OPEN__MODAL,
+			payload: { modalType: "login", data: { chosen, type: "login" } },
+		});
 	};
 
 	return (

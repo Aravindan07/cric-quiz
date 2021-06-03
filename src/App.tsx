@@ -1,20 +1,28 @@
-import { Route, Switch } from "react-router-dom";
-import { Modal, Navbar, CategoryCard } from "./components";
-import { NotFoundPage, QuizPage, ResultPage } from "./pages";
+import { useEffect } from "react";
+import { Modal, Navbar } from "./components";
 import { GlobalStyle } from "./GlobalStyles";
+import { Routes } from "./routes";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useQuizData } from "./context/quizContext";
 
 function App() {
+	const { loadUser, state } = useQuizData();
+	console.log("state", state);
+
+	useEffect(() => {
+		loadUser();
+	}, [loadUser]);
+
+	toast.configure();
+
 	return (
 		<>
 			<GlobalStyle />
 			<Navbar />
+			<ToastContainer />
 			<Modal />
-			<Switch>
-				<Route path="/" exact component={CategoryCard} />
-				<Route path="/quiz" exact component={QuizPage} />
-				<Route path="/quiz/result" exact component={ResultPage} />
-				<Route path="*" component={NotFoundPage} />
-			</Switch>
+			<Routes />
 		</>
 	);
 }

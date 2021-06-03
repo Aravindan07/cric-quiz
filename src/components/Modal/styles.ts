@@ -8,7 +8,7 @@ export function useModalStyles() {
 
 	const content = {
 		width: width <= 500 ? "80%" : "50%",
-		height: "50%",
+		height: "80%",
 		margin: "auto",
 		borderRadius: "5px",
 		padding: width <= 500 ? "30px 10px" : "30px 20px 20px 20px",

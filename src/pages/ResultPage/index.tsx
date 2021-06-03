@@ -8,12 +8,13 @@ import { PageWrapper } from "../QuizPage/styles";
 import { useEffect } from "react";
 
 function ResultPage() {
+	const {
+		state: { userAnswers, questions, name, score },
+	} = useQuizData();
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
-	const {
-		state: { userAnswers, questions, name },
-	} = useQuizData();
 
 	const history = useHistory();
 
@@ -21,15 +22,14 @@ function ResultPage() {
 		return history.push("/");
 	};
 
-	const score = userAnswers.filter((userAnswer: AnswerObject) => userAnswer.correct === true);
+	console.log("questions", questions);
 
 	return (
 		<PageWrapper>
 			<h2>Score Summary</h2>
-			{questions[0] && (
+			{questions && (
 				<ScoreText>
-					Hey {name} you scored {score.length * 10}/{questions[0].questions.length * 10}{" "}
-					points
+					Hey {name} you scored {score}/{questions.length * 10} points
 				</ScoreText>
 			)}
 			{userAnswers.map(({ _id, correctAnswer, answer, question, correct }: AnswerObject) => (

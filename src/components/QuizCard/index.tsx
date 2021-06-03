@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ADD__ANSWER } from "../../constants";
+import { ADD__ANSWER, CALCULATE__SCORE } from "../../constants";
 import { useQuizData } from "../../context/quizContext";
 import { OptionType, Question } from "../../types/quiz.types";
 import { CancelButton } from "../Modal/AddName/styles";
@@ -13,17 +13,20 @@ type Props = {
 };
 
 function QuizCard({ data, nextQuestion, scoreGetter, isLast }: Props) {
+	console.log("data", data);
+	console.log("isLast", isLast);
+
 	const { dispatch } = useQuizData();
 	const [color, setColor] = useState("");
 
 	const checkAnswerCorrect = (item: string) => {
-		return data.options.find((option) => option.name === item);
+		return data?.options.find((option) => option.name === item);
 	};
 
-	const getCorrectAnswer = () => data.options.find((option) => option.correct === true);
+	const getCorrectAnswer = () => data?.options.find((option) => option.correct === true);
 
 	const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
-		const findOption = data.options.find((option) => option.name === color);
+		const findOption = data?.options.find((option) => option.name === color);
 
 		const answerObj = {
 			_id: findOption?._id,
@@ -34,7 +37,9 @@ function QuizCard({ data, nextQuestion, scoreGetter, isLast }: Props) {
 		};
 
 		dispatch({ type: ADD__ANSWER, payload: answerObj });
-		return isLast ? nextQuestion(e) : scoreGetter(e);
+		answerObj.correct && dispatch({ type: CALCULATE__SCORE });
+
+		return !isLast ? nextQuestion(e) : scoreGetter(e);
 	};
 
 	const changeColor = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -56,7 +61,7 @@ function QuizCard({ data, nextQuestion, scoreGetter, isLast }: Props) {
 					</AnswerButton>
 				))}
 			</CardWrapper>
-			{isLast ? (
+			{!isLast ? (
 				<CancelButton onClick={(e) => checkAnswer(e)}>Next</CancelButton>
 			) : (
 				<CancelButton onClick={(e) => checkAnswer(e)}>See Score</CancelButton>
