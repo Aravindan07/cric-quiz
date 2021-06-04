@@ -21,19 +21,6 @@ import { useHistory } from "react-router";
 import { CancelButton } from "../../components/Modal/AddName/styles";
 import { SET__LOGOUT, img1, img2 } from "../../constants";
 
-// const quiz = [
-// 	{
-// 		quizName: "IPL",
-// 		scores: [30, 50, 60, 10, 20],
-// 		highScore: 60,
-// 	},
-// 	{
-// 		quizName: "Random",
-// 		scores: [100, 130, 90, 110, 120],
-// 		highScore: 130,
-// 	},
-// ];
-
 function Login() {
 	const {
 		state: { dashboard },
@@ -105,6 +92,13 @@ function Login() {
 							</IndividualHistoryDiv>
 						))}
 					</HistoryDiv>
+					<CancelButton
+						marginNotNeeded={false}
+						style={{ textTransform: "none" }}
+						onClick={logoutClickHandler}
+					>
+						Logout
+					</CancelButton>
 				</>
 			) : (
 				<TextCenterDiv>

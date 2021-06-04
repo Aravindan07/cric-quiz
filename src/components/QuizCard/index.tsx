@@ -9,7 +9,7 @@ import { AnswerButton, CardWrapper, QuestionText } from "./styles";
 type Props = {
 	data: Question;
 	nextQuestion: (e: React.MouseEvent<HTMLButtonElement>) => void;
-	scoreGetter: (e: React.MouseEvent<HTMLButtonElement>) => void;
+	scoreGetter: (correct: boolean) => void;
 	isLast?: boolean;
 };
 
@@ -40,11 +40,12 @@ function QuizCard({ data, nextQuestion, scoreGetter, isLast }: Props) {
 			return setMessage("Please choose an option!");
 		}
 		dispatch({ type: ADD__ANSWER, payload: answerObj });
-		answerObj.correct && dispatch({ type: CALCULATE__SCORE });
+
+		(answerObj.correct || isLast) && dispatch({ type: CALCULATE__SCORE });
 		setColor("");
 		setMessage("");
 
-		return !isLast ? nextQuestion!(e) : scoreGetter!(e);
+		return !isLast ? nextQuestion!(e) : scoreGetter!(answerObj.correct!);
 	};
 
 	const changeColor = (e: React.MouseEvent<HTMLButtonElement>) => {

@@ -25,8 +25,8 @@ function QuizPage() {
 		setQuestionNumber((prev) => prev + 1);
 	};
 
-	const seeScoreHandler = () => {
-		addScore(user?._id!, quizCategory!, score);
+	const seeScoreHandler = async (correct: boolean) => {
+		addScore(user?._id!, quizCategory!, correct ? score + 10 : score);
 		return history.push("/quiz/result");
 	};
 
