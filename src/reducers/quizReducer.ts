@@ -23,6 +23,7 @@ export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 			};
 
 		case Actions.SET__QUIZ__CATEGORY: {
+			localStorage.setItem("quiz-category", action.payload);
 			return {
 				...state,
 				category: action.payload,
@@ -36,8 +37,6 @@ export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 			};
 
 		case Actions.SET__QUESTIONS:
-			console.log("action.payload", action.payload);
-
 			return {
 				...state,
 				questions: [...action.payload.questions],
@@ -56,14 +55,15 @@ export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 			};
 
 		case Actions.UPDATE__USER__DASHBOARD:
+			localStorage.removeItem("quiz-category");
 			return {
 				...state,
-				dashboard: action.payload.item.quiz,
+				dashboard: action.payload.item.quiz!,
 			};
 
 		case Actions.SET__LOGIN:
 			localStorage.setItem("token", action.payload.token);
-			localStorage.setItem("userAuthenticated", "true");
+			localStorage.setItem("userAuthenticated", JSON.parse("true"));
 			return {
 				...state,
 				isAuthenticated: true,
@@ -73,7 +73,7 @@ export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 
 		case Actions.SET__SIGNUP:
 			localStorage.setItem("token", action.payload.token);
-			localStorage.setItem("userAuthenticated", "true");
+			localStorage.setItem("userAuthenticated", JSON.parse("true"));
 			return {
 				...state,
 				user: action.payload.user,
@@ -86,12 +86,13 @@ export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 				...state,
 				user: action.payload.user,
 				isAuthenticated: true,
-				dashboard: action.payload.user.userScores!.quiz,
+				dashboard: action.payload.user ? action.payload.user.userScores?.quiz : [],
 			};
 
 		case Actions.SET__LOGOUT:
 			localStorage.removeItem("token");
 			localStorage.removeItem("userAuthenticated");
+			localStorage.removeItem("quiz-category");
 			return {
 				...state,
 				user: null,

@@ -63,7 +63,7 @@ export type UserType = {
 	_id: string;
 	name: string;
 	email: string;
-	userScores: UserScoreType | null;
+	userScores: UserScoreType;
 };
 
 export type LoginState = {
@@ -91,7 +91,7 @@ export type QuizResponseTypeFromDashboard = {
 export type itemType = {
 	_id: string;
 	userId: string;
-	quiz: Array<QuizResponseTypeFromDashboard>;
+	quiz?: Array<QuizResponseTypeFromDashboard>;
 };
 
 export type UpdateDashboardResponseType = {

@@ -86,12 +86,16 @@ export const ButtonsWrapper = styled.div`
 	}
 `;
 
-export const CancelButton = styled.button`
+type CancelButtonProps = {
+	marginNotNeeded?: boolean;
+};
+
+export const CancelButton = styled.button<CancelButtonProps>`
 	background-color: #b91538;
 	font-size: 18px;
 	border-radius: 5px;
 	padding: 10px;
-	margin: 2.5rem 0;
+	margin: ${(props) => (props.marginNotNeeded ? "0" : "2.5rem 0")};
 	cursor: pointer;
 	letter-spacing: 1px;
 	border: none;

@@ -1,18 +1,14 @@
 import { Redirect, Route } from "react-router";
-import { useQuizData } from "./context/quizContext";
 
 export const PrivateRoute = ({ path, ...props }: any) => {
-	const {
-		state: { isAuthenticated },
-	} = useQuizData();
-	// const userAuthenticated = localStorage.getItem("userAuthenticated");
+	const userAuthenticated = localStorage.getItem("userAuthenticated");
 
-	return isAuthenticated ? (
+	return userAuthenticated ? (
 		<Route path={path} {...props} />
 	) : (
 		<Redirect
 			to={{
-				pathname: "/my-account",
+				pathname: "/",
 				state: { from: props.location },
 			}}
 		/>

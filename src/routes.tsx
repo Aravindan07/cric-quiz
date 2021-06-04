@@ -7,9 +7,9 @@ export function Routes() {
 	return (
 		<Switch>
 			<Route path="/" exact component={CategoryCard} />
-			<Route path="/my-account" exact component={AccountPage} />
+			<PrivateRoute path="/my-account" exact component={AccountPage} />
 			<PrivateRoute path="/quiz" exact component={QuizPage} />
-			<Route path="/quiz/result" exact component={ResultPage} />
+			<PrivateRoute path="/quiz/result" exact component={ResultPage} />
 			<Route path="*" component={NotFoundPage} />
 		</Switch>
 	);

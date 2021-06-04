@@ -181,3 +181,17 @@ export const ScoreDiv = styled.div`
 		margin-right: 1rem;
 	}
 `;
+
+export const TextCenterDiv = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+export const FlexBetween = styled.div`
+	margin-top: 3rem;
+	display: flex;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	width: 100%;
+`;

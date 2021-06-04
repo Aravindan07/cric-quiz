@@ -7,8 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useQuizData } from "./context/quizContext";
 
 function App() {
-	const { loadUser, state } = useQuizData();
-	console.log("state", state);
+	const { loadUser } = useQuizData();
 
 	useEffect(() => {
 		loadUser();

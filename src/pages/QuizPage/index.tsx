@@ -7,26 +7,26 @@ import { useHistory } from "react-router";
 
 function QuizPage() {
 	const {
-		state: { questions, category, user, score },
+		state: { questions, user, score },
 		fetchQuiz,
 		addScore,
 	} = useQuizData();
 
-	const [questionNumber, setQuestionNumber] = useState(0);
-	const history = useHistory();
-
-	console.log(questions[questionNumber]);
+	const quizCategory = localStorage.getItem("quiz-category");
 
 	useEffect(() => {
-		fetchQuiz(category);
-	}, [fetchQuiz, category]);
+		fetchQuiz(quizCategory!);
+	}, [fetchQuiz, quizCategory]);
+
+	const [questionNumber, setQuestionNumber] = useState(0);
+	const history = useHistory();
 
 	const incrementQuestionNumber = () => {
 		setQuestionNumber((prev) => prev + 1);
 	};
 
 	const seeScoreHandler = () => {
-		addScore(user?._id!, category, score);
+		addScore(user?._id!, quizCategory!, score);
 		return history.push("/quiz/result");
 	};
 
@@ -39,7 +39,7 @@ function QuizPage() {
 			</p>
 
 			<QuizCard
-				data={questions[questionNumber] && questions[questionNumber]}
+				data={questions && questions[questionNumber]}
 				nextQuestion={incrementQuestionNumber}
 				scoreGetter={seeScoreHandler}
 				isLast={questions[questionNumber + 1] === undefined}

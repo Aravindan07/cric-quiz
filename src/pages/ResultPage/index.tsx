@@ -6,6 +6,8 @@ import { StartButton } from "../../components";
 import { CorrectAnswerText, ResultDiv, ScoreText } from "./styles";
 import { PageWrapper } from "../QuizPage/styles";
 import { useEffect } from "react";
+import { CancelButton } from "../../components/Modal/AddName/styles";
+import { FlexBetween } from "../AccountPage/styles";
 
 function ResultPage() {
 	const {
@@ -22,7 +24,9 @@ function ResultPage() {
 		return history.push("/");
 	};
 
-	console.log("questions", questions);
+	const goToDashboard = () => {
+		return history.push("/my-account");
+	};
 
 	return (
 		<PageWrapper>
@@ -55,7 +59,10 @@ function ResultPage() {
 					)}
 				</CardWrapper>
 			))}
-			<StartButton onClick={retakeQuiz}>Retake</StartButton>
+			<FlexBetween>
+				<CancelButton onClick={goToDashboard}>Dashboard</CancelButton>
+				<StartButton onClick={retakeQuiz}>Retake</StartButton>
+			</FlexBetween>
 		</PageWrapper>
 	);
 }

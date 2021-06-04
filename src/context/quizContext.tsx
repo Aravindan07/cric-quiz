@@ -43,8 +43,6 @@ export const TokenConfig = () => {
 		config.headers["Authorization"] = `Bearer ${token}`;
 	}
 
-	console.log("config", config);
-
 	return config;
 };
 
@@ -76,14 +74,12 @@ export const QuizDataProvider: React.FC = ({ children }) => {
 		try {
 			dispatch({ type: Actions.SET__LOADING, payload: true });
 			const { data } = await axios.get(`${REACT_APP_BACKEND_URL}/users`, TokenConfig());
-			console.log("Data after load", data);
-
 			dispatch({ type: Actions.LOAD__USER, payload: data });
 			dispatch({ type: Actions.SET__LOADING, payload: false });
 		} catch (error) {
 			dispatch({ type: Actions.SET__LOADING, payload: true });
 			toast.error(error.response.data.message, {
-				style: { backgroundColor: "#b91538", letterSpacing: "0.8px" },
+				style: { backgroundColor: "#b91538" },
 				autoClose: 2000,
 				hideProgressBar: true,
 			});
@@ -99,7 +95,6 @@ export const QuizDataProvider: React.FC = ({ children }) => {
 				email,
 				password,
 			});
-			console.log("data after register", data);
 
 			dispatch({ type: Actions.SET__SIGNUP, payload: data });
 			toast.success(data.message, {
@@ -125,8 +120,6 @@ export const QuizDataProvider: React.FC = ({ children }) => {
 				email,
 				password,
 			});
-			console.log("data after login", data);
-
 			dispatch({ type: Actions.SET__LOGIN, payload: data });
 			toast.success(data.message, {
 				autoClose: 2000,
@@ -147,7 +140,6 @@ export const QuizDataProvider: React.FC = ({ children }) => {
 	const fetchQuiz = useCallback(async (category: string) => {
 		try {
 			const { data } = await axios.get(`${REACT_APP_BACKEND_URL}/quiz?category=${category}`);
-			console.log("Data after fetching quiz", data);
 			dispatch({ type: Actions.SET__QUESTIONS, payload: data });
 		} catch (error) {
 			console.error(error);
@@ -157,7 +149,7 @@ export const QuizDataProvider: React.FC = ({ children }) => {
 	const addScore = async (userId: string, quizName: string, score: number) => {
 		try {
 			toast.info("Generating your score ...", {
-				autoClose: 2000,
+				autoClose: 1000,
 				hideProgressBar: true,
 			});
 			const { data } = await axios.post(
@@ -165,7 +157,6 @@ export const QuizDataProvider: React.FC = ({ children }) => {
 				{ userId, quizName, score },
 				TokenConfig()
 			);
-			console.log("Data after score added!", data);
 			return dispatch({ type: Actions.UPDATE__USER__DASHBOARD, payload: data });
 		} catch (error) {
 			console.error(error);
