@@ -69,7 +69,7 @@ function Login() {
 											{quiz.quizName === "random" ? 14 : 6} questions
 										</small>
 										<Separator></Separator>
-										<small>Your HighScore - {quiz.highScore}</small>
+										<small>HighScore - {quiz.highScore}</small>
 									</FlexWrap>
 								</CardContentDiv>
 							</GameCard>
