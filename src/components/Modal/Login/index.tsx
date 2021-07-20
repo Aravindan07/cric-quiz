@@ -8,8 +8,6 @@ import { CloseIconDiv, Input, InputWrap, Label, ModalTitle, Wrapper } from "../A
 import { ReactComponent as CloseIcon } from "../../../icons/close-icon.svg";
 
 function LoginModal({ data }: any) {
-	console.log("data", data);
-
 	const initialState = {
 		name: "",
 		email: "",
