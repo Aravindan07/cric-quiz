@@ -86,6 +86,21 @@ export const ButtonsWrapper = styled.div`
 	}
 `;
 
+export const TestCredentialsButton = styled.button`
+	border-radius: 5px;
+	padding: 0.5rem;
+	color: #fff;
+	background-color: #15b996;
+	border: 1px solid transparent;
+	font-size: 16px;
+	cursor: pointer;
+	margin-bottom: 0.5rem;
+	letter-spacing: 0.6px;
+	:hover {
+		box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+	}
+`;
+
 type CancelButtonProps = {
 	marginNotNeeded?: boolean;
 };

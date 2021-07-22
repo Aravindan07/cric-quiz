@@ -4,7 +4,15 @@ import { CLOSE__MODAL, OPEN__MODAL } from "../../../constants";
 import { useQuizData } from "../../../context/quizContext";
 import { NoAccountInfo } from "../../../pages/AccountPage/styles";
 import { StartButton } from "../../CategoryCard/styles";
-import { CloseIconDiv, Input, InputWrap, Label, ModalTitle, Wrapper } from "../AddName/styles";
+import {
+	CloseIconDiv,
+	Input,
+	InputWrap,
+	Label,
+	ModalTitle,
+	Wrapper,
+	TestCredentialsButton,
+} from "../AddName/styles";
 import { ReactComponent as CloseIcon } from "../../../icons/close-icon.svg";
 
 function LoginModal({ data }: any) {
@@ -61,6 +69,20 @@ function LoginModal({ data }: any) {
 		return dispatch({ type: CLOSE__MODAL });
 	};
 
+	const useTestCredentials = () => {
+		const name1 = "email";
+		const name2 = "password";
+		const label1 = "isEmailActive";
+		const label2 = "isPasswordActive";
+
+		setState((prevState) => ({
+			...prevState,
+			[name1]: "check123@gmail.com",
+			[name2]: "check@123",
+		}));
+		setIsActive((prevState) => ({ ...prevState, [label1]: true, [label2]: true }));
+	};
+
 	return (
 		<Wrapper>
 			<CloseIconDiv onClick={modalCloseHandler}>
@@ -115,6 +137,11 @@ function LoginModal({ data }: any) {
 			<StartButton onClick={loginClickHandler}>
 				{data.type === "login" ? "Signin" : "Register"}
 			</StartButton>
+			{data.type === "login" && (
+				<TestCredentialsButton onClick={useTestCredentials}>
+					Test Credentials
+				</TestCredentialsButton>
+			)}
 			{data.type === "login" ? (
 				<NoAccountInfo className="mt-8 mb-8">
 					Don't have an account?
