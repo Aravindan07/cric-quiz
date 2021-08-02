@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { CLOSE__MODAL, OPEN__MODAL } from "../../../constants";
+import { CLOSE__MODAL, OPEN__MODAL, SET__QUIZ__CATEGORY } from "../../../constants";
 import { useQuizData } from "../../../context/quizContext";
 import { NoAccountInfo } from "../../../pages/AccountPage/styles";
 import { StartButton } from "../../CategoryCard/styles";
@@ -47,8 +47,10 @@ function LoginModal({ data }: any) {
 
 	const loginClickHandler = () => {
 		if (data.type === "login") {
+			dispatch({ type: SET__QUIZ__CATEGORY, payload: data.chosen });
 			return logInUser(email, password);
 		}
+		dispatch({ type: SET__QUIZ__CATEGORY, payload: data.chosen });
 		return registerUser(name, email, password);
 	};
 

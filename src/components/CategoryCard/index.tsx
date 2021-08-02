@@ -27,15 +27,15 @@ function CategoryCard() {
 		return setChosen(item);
 	};
 
-	const openModalHandler = () => {
+	const openModalHandler = async () => {
 		if (chosen === "") {
 			return setMessage("Please click on a Category");
 		}
 
-		dispatch({ type: REMOVE__QUIZ__CATEGORY });
-		dispatch({ type: SET__QUIZ__CATEGORY, payload: chosen });
+		await dispatch({ type: REMOVE__QUIZ__CATEGORY });
 
 		if (state.isAuthenticated) {
+			await dispatch({ type: SET__QUIZ__CATEGORY, payload: chosen });
 			return history.push("/quiz");
 		}
 
