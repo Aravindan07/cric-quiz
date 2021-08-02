@@ -28,8 +28,6 @@ function ResultPage() {
 		return history.push("/my-account");
 	};
 
-	console.log("score", score);
-
 	return (
 		<PageWrapper>
 			<h2>Score Summary</h2>

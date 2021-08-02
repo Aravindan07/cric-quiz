@@ -113,4 +113,5 @@ export type ActionsType =
 	| { type: typeof Actions.SET__LOGOUT }
 	| { type: typeof Actions.SET__QUIZ__CATEGORY; payload: string }
 	| { type: typeof Actions.CALCULATE__SCORE }
-	| { type: typeof Actions.UPDATE__USER__DASHBOARD; payload: UpdateDashboardResponseType };
+	| { type: typeof Actions.UPDATE__USER__DASHBOARD; payload: UpdateDashboardResponseType }
+	| { type: typeof Actions.REMOVE__QUIZ__CATEGORY };

@@ -4,6 +4,7 @@ import { ActionsType, AppState } from "../types/quiz.types";
 export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 	switch (action.type) {
 		case Actions.OPEN__MODAL:
+			localStorage.removeItem("quiz-category");
 			return {
 				...state,
 				modal: {
@@ -12,6 +13,8 @@ export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 					modalType: action.payload.modalType,
 					data: action.payload.data,
 				},
+				score: 0,
+				userAnswers: [],
 			};
 		case Actions.CLOSE__MODAL:
 			return {
@@ -27,6 +30,15 @@ export const quizReducer = (state: AppState, action: ActionsType): AppState => {
 			return {
 				...state,
 				category: action.payload,
+			};
+		}
+
+		case Actions.REMOVE__QUIZ__CATEGORY: {
+			localStorage.removeItem("quiz-category");
+			return {
+				...state,
+				score: 0,
+				userAnswers: [],
 			};
 		}
 

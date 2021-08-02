@@ -9,6 +9,7 @@ export const SET__LOGOUT = "SET__LOGOUT";
 export const SET__LOADING = "SET__LOADING";
 export const LOAD__USER = "LOAD__USER";
 export const SET__QUIZ__CATEGORY = "SET__QUIZ__CATEGORY";
+export const REMOVE__QUIZ__CATEGORY = "REMOVE__QUIZ__CATEGORY";
 export const CALCULATE__SCORE = "CALCULATE__SCORE";
 export const UPDATE__USER__DASHBOARD = "UPDATE__USER__DASHBOARD";
 

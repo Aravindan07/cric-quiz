@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { OPEN__MODAL, SET__QUIZ__CATEGORY } from "../../constants";
+import { OPEN__MODAL, REMOVE__QUIZ__CATEGORY, SET__QUIZ__CATEGORY } from "../../constants";
 import { useQuizData } from "../../context/quizContext";
 import { Card, CardTitle, CardWrap, ErrorMessage, Heading, Main, StartButton } from "./styles";
 
@@ -32,6 +32,7 @@ function CategoryCard() {
 			return setMessage("Please click on a Category");
 		}
 
+		dispatch({ type: REMOVE__QUIZ__CATEGORY });
 		dispatch({ type: SET__QUIZ__CATEGORY, payload: chosen });
 
 		if (state.isAuthenticated) {

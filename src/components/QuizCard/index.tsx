@@ -14,9 +14,7 @@ type Props = {
 };
 
 function QuizCard({ data, nextQuestion, scoreGetter, isLast }: Props) {
-	console.log("isLast", isLast);
-
-	const { state, dispatch } = useQuizData();
+	const { dispatch } = useQuizData();
 
 	const [color, setColor] = useState("");
 	const [message, setMessage] = useState("");
@@ -43,8 +41,6 @@ function QuizCard({ data, nextQuestion, scoreGetter, isLast }: Props) {
 		}
 		dispatch({ type: ADD__ANSWER, payload: answerObj });
 
-		console.log(answerObj);
-
 		// if (answerObj.correct) {
 		// 	dispatch({ type: CALCULATE__SCORE });
 		// }
@@ -62,8 +58,6 @@ function QuizCard({ data, nextQuestion, scoreGetter, isLast }: Props) {
 	const changeColor = (e: React.MouseEvent<HTMLButtonElement>) => {
 		return setColor(e.currentTarget.value);
 	};
-
-	console.log("score in Card", state.score);
 
 	return (
 		<>
