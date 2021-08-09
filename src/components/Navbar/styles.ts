@@ -14,7 +14,7 @@ export const NavbarWrapper = styled.div`
 	.logo {
 		width: 25px;
 		height: 25px;
-		margin-top: 2px;
+		margin-top: 5px;
 	}
 `;
 
@@ -27,16 +27,27 @@ export const TitleContainer = styled.div`
 export const NavTitle = styled.h2`
 	margin-left: 5px;
 	letter-spacing: 0.8px;
+	a {
+		text-decoration: none;
+		color: #fff;
+	}
+`;
+
+export const FlexWrap = styled.div`
+	display: flex;
+	align-items: center;
+	margin-right: 1rem;
 `;
 
 export const UserIconWrap = styled.div`
-	height: 80%;
 	display: flex;
 	align-items: center;
-	background-color: #7000df;
+	background-color: #0a5c4a;
 	border-radius: 50%;
-	margin-right: 1rem;
-	padding: 2px;
+	padding: 0.5rem;
+	cursor: pointer;
+	line-height: 14.5px;
+	margin-right: 5px;
 	svg {
 		width: 35px;
 		height: 35px;
